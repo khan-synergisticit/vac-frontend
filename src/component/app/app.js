@@ -13,7 +13,7 @@ let ApplicationComponent =(props) =>{
             <>
            <div>
             <h1>
-              Hello
+              Synergistic ID full stack project
             </h1>
            </div>
             </>
