@@ -1,26 +1,40 @@
-// import React, { useEffect } from "react";
-// import { BrowserRouter as Router, Routes, Route, useNavigate, redirect} from "react-router-dom";
-
-// import "../app.css";
+import React, {useEffect} from "react";
 import logo from "./donkey.png";
 import "@aws-amplify/ui-react/styles.css";
+import HeaderComponent from "../header/header";
+import FooterComponent from "../footer/footer";
+import { useSelector, useDispatch } from "react-redux";
+import { FetchUserFromDB } from "../../state/user/userAction";
 import {
   withAuthenticator,
-  Button,
-  Heading,
   Image,
   View,
   Card,
+  
 } from "@aws-amplify/ui-react";
 
-let ApplicationComponent =({ signOut }) =>{
+function ApplicationComponent({ signOut, user } ) {
+  let User = useSelector((state) => state.UserReducer.User);
+  let dispatch = useDispatch();
+  let userName = User && User.userName ? User.userName : "";
+  useEffect(()=>{
+    if(userName == ""){
+      let newUser = {
+        userID : user.userId,
+        userName: user.username,
+        role: "user"
+      }
+      dispatch(FetchUserFromDB(newUser));
+    }
+  }, [])
+      console.log("userName: " + JSON.stringify(userName))
         return(
           <View className="App">
+          <HeaderComponent signOut={signOut} userName={userName}/>
           <Card>
             <Image src={logo} className="App-logo" alt="logo" />
-            <Heading level={1}>We now have Auth!</Heading>
           </Card>
-          <Button onClick={signOut}>Sign Out</Button>
+          <FooterComponent/>
         </View>
         );
 }
