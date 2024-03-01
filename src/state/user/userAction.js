@@ -15,7 +15,7 @@ export const AddUserToStore = (newUser) => {
 
 export const SaveUserToDB = (newUser)=>{
   return (dispatch)=>{
-    axios.post("https://172.31.43.36:8080/users/saveUser", newUser)
+    axios.post("https://3.26.185.123:8080/users/saveUser", newUser)
     .then((data) => {
       let savedUser = data.data;
       dispatch(FetchUserFromDB(savedUser.userID)) 
@@ -43,7 +43,7 @@ export const FetchUserFromDB = (user) =>{
         return Promise.reject(error);
       }
     );
-    axiosInstance.post("https://172.31.43.36:8080/users/finduser", user)
+    axiosInstance.post("https://3.26.185.123:8080/users/finduser", user)
     .then((data)=>{
       let user = data.data;
       console.log("Fetuser: " + JSON.stringify(data.data))
