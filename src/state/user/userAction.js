@@ -29,7 +29,7 @@ export const SaveUserToDB = (newUser)=>{
 export const FetchUserFromDB = (user) =>{
   console.log("Fetch User from DB: " + JSON.stringify(user))
   return (dispatch)=>{
-    axiosInstance.defaults.maxRedirects = 0; // Set to 0 to prevent automatic redirects
+    axiosInstance.defaults.maxRedirects = 0; 
     axiosInstance.interceptors.response.use(
       response => response,
       error => {
