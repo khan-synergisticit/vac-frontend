@@ -1,0 +1,15 @@
+{
+  "main": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-vacfrontend-main-154700-authRole",
+      "UnauthRoleArn": "arn:aws:iam::070461019651:role/amplify-vacfrontend-main-154700-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::070461019651:role/amplify-vacfrontend-main-154700-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-vacfrontend-main-154700-deployment",
+      "UnauthRoleName": "amplify-vacfrontend-main-154700-unauthRole",
+      "StackName": "amplify-vacfrontend-main-154700",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:070461019651:stack/amplify-vacfrontend-main-154700/f1584a20-d7e2-11ee-baa7-0a6178d85a4b",
+      "AmplifyAppId": "d1xplkustdeeqy"
+    }
+  }
+}
