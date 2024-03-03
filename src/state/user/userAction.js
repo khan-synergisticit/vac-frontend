@@ -15,7 +15,7 @@ export const AddUserToStore = (newUser) => {
 
 export const SaveUserToDB = (newUser)=>{
   return (dispatch)=>{
-    axios.post("http://localhost:8080/saveUser", newUser)
+    axios.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/saveUser", newUser)
     .then((data) => {
       let savedUser = data.data;
       dispatch(FetchUserFromDB(savedUser.userID)) 
@@ -50,7 +50,7 @@ export const FetchUserFromDB = (user) =>{
           "Access-Control-Allow-Origin": "*",
       }
     }
-    axiosInstance.post("http://localhost:8080/finduser", user, header)
+    axiosInstance.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/finduser", user, header)
     .then((data)=>{
       let user = data.data;
       console.log("Fetuser: " + JSON.stringify(data.data))
