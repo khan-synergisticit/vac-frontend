@@ -43,7 +43,14 @@ export const FetchUserFromDB = (user) =>{
         return Promise.reject(error);
       }
     );
-    axiosInstance.post("http://localhost:8080/finduser", user)
+
+    let header ={
+      headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Access-Control-Allow-Origin": "*",
+      }
+    }
+    axiosInstance.post("http://localhost:8080/finduser", user, header)
     .then((data)=>{
       let user = data.data;
       console.log("Fetuser: " + JSON.stringify(data.data))
