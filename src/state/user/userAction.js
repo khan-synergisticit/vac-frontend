@@ -15,7 +15,7 @@ export const AddUserToStore = (newUser) => {
 
 export const SaveUserToDB = (newUser)=>{
   return (dispatch)=>{
-    axios.post("https://mrz2h0u1sc.execute-api.ap-southeast-2.amazonaws.com/vac-stage/users/saveUser", newUser)
+    axios.post("localhost:8080/users/saveUser", newUser)
     .then((data) => {
       let savedUser = data.data;
       dispatch(FetchUserFromDB(savedUser.userID)) 
@@ -43,7 +43,7 @@ export const FetchUserFromDB = (user) =>{
         return Promise.reject(error);
       }
     );
-    axiosInstance.post("https://mrz2h0u1sc.execute-api.ap-southeast-2.amazonaws.com/vac-stage/users/finduser", user)
+    axiosInstance.post("localhost:8080/users/finduser", user)
     .then((data)=>{
       let user = data.data;
       console.log("Fetuser: " + JSON.stringify(data.data))
