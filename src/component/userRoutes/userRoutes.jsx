@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
 export const Page404 = lazy(() => import('../pages/pageNotFound.jsx'));
