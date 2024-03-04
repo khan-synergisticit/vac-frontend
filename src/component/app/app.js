@@ -13,6 +13,9 @@ import {
   Card,
   
 } from "@aws-amplify/ui-react";
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
 import UserRouter from "../userRoutes/userRoutes.jsx";
 import AdminRouter from "../adminRoutes/adminRoutes.jsx";
 
@@ -59,13 +62,15 @@ function ApplicationComponent({ signOut, user } ) {
         return(
           <View className="App">
           <HeaderComponent signOut={signOut} userName={userName}/>
+          <Router>
           <div  style={{
               position: 'absolute', left: '50%', top: '50%',
               transform: 'translate(-50%, -50%)'
           }}>
+
           {userName == "" ? <Circle/> : isAdmin ? <AdminRouter/> : <UserRouter/>}
           </div>
-            
+          </Router>
           <FooterComponent/>
         </View>
         );
