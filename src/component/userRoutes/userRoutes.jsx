@@ -10,9 +10,11 @@ export default function UserRouter({isAdmin}) {
     {
       element: (
         
-        <Suspense>
-        <Outlet />
-      </Suspense>
+        {/* <DashboardLayout>
+          <Suspense>
+            <Outlet />
+          </Suspense>
+        </DashboardLayout> */}
       ),
       children: [
        // { element: <IndexPage />, index: true },
