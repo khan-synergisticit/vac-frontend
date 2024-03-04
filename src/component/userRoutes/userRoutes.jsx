@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
+import DashboardComponent from '../dashboard/dashboard.jsx';
 export const Page404 = lazy(() => import('../pages/pageNotFound.jsx'));
 
 // ----------------------------------------------------------------------
@@ -10,11 +11,11 @@ export default function UserRouter({isAdmin}) {
     {
       element: (
         
-        {/* <DashboardLayout>
+        <DashboardComponent>
           <Suspense>
             <Outlet />
           </Suspense>
-        </DashboardLayout> */}
+        </DashboardComponent>
       ),
       children: [
        // { element: <IndexPage />, index: true },
