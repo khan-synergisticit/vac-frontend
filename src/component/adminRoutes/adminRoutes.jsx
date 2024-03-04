@@ -1,11 +1,17 @@
 import React, { lazy, Suspense } from 'react';
-import { Outlet, Navigate, useRoutes } from 'react-router-dom';
-
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 export const Page404 = lazy(() => import('../pages/pageNotFound.jsx'));
 
 // ----------------------------------------------------------------------
 
 export default function AdminRouter() {
+
+  // return (
+  //   <Routes>
+  //     <Route path="*" element={<Page404/>}/>
+
+  //   </Routes>
+  // )
   const routes = useRoutes([
     {
       element: (

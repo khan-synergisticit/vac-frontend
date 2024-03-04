@@ -63,16 +63,16 @@ function ApplicationComponent({ signOut, user } ) {
           <View className="App">
           <HeaderComponent signOut={signOut} userName={userName}/>
           <Router>
+            {isAdmin ? <AdminRouter/> : <UserRouter/>}
+          </Router>
           <div  style={{
               position: 'absolute', left: '50%', top: '50%',
               transform: 'translate(-50%, -50%)'
           }}>
-           {/*  <Suspense fallback={<Circle />}>
-              <SomeComponent />
-            </Suspense> */}
-          {userName == "" ? <Circle/> : <TempComp/>/*   <UserRouter/> */}
+          
+          {userName == "" ? <Circle/> : <TempComp/>}
+          
           </div>
-          </Router>
           <FooterComponent/>
         </View>
         );
