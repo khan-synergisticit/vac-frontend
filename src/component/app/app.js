@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, Suspense} from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import logo from "./donkey.png";
 import "@aws-amplify/ui-react/styles.css";
@@ -67,8 +67,10 @@ function ApplicationComponent({ signOut, user } ) {
               position: 'absolute', left: '50%', top: '50%',
               transform: 'translate(-50%, -50%)'
           }}>
-
-          {userName == "" ? <Circle/> : isAdmin ? <AdminRouter/> : <UserRouter/>}
+            <Suspense fallback={<Circle />}>
+              <SomeComponent />
+            </Suspense>
+          {userName == "" ? <Circle/> : <TempComp/>/*  isAdmin ? <AdminRouter/> : <UserRouter/> */}
           </div>
           </Router>
           <FooterComponent/>
