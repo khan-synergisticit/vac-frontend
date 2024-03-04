@@ -1,4 +1,5 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 import logo from "./donkey.png";
 import "@aws-amplify/ui-react/styles.css";
 import HeaderComponent from "../header/header";
@@ -13,7 +14,11 @@ import {
   
 } from "@aws-amplify/ui-react";
 
+
 function ApplicationComponent({ signOut, user } ) {
+  let [loading, setLoading] = useState(true);
+  let [color, setColor] = useState("#ffffff");
+
   let User = useSelector((state) => state.UserReducer.User);
   let dispatch = useDispatch();
   let userName = User && User.userName ? User.userName : "";
@@ -28,12 +33,37 @@ function ApplicationComponent({ signOut, user } ) {
     }
   }, [])
       console.log("userName: " + JSON.stringify(userName))
-        return(
-          <View className="App">
-          <HeaderComponent signOut={signOut} userName={userName}/>
+
+      let TempComp = () =>{
+        return (
           <Card>
             <Image src={logo} className="App-logo" alt="logo" />
           </Card>
+        )
+      }
+
+      let Circle = () => {
+        return (
+          <ClipLoader
+         
+            loading={loading}
+            
+            size={150}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        )
+      }
+        return(
+          <View className="App">
+          <HeaderComponent signOut={signOut} userName={userName}/>
+          <div  style={{
+              position: 'absolute', left: '50%', top: '50%',
+              transform: 'translate(-50%, -50%)'
+          }}>
+          {userName == "" ? <Circle/> : <TempComp/>}
+          </div>
+            
           <FooterComponent/>
         </View>
         );
