@@ -67,9 +67,9 @@ function ApplicationComponent({ signOut, user } ) {
               position: 'absolute', left: '50%', top: '50%',
               transform: 'translate(-50%, -50%)'
           }}>
-            <Suspense fallback={<Circle />}>
+           {/*  <Suspense fallback={<Circle />}>
               <SomeComponent />
-            </Suspense>
+            </Suspense> */}
           {userName == "" ? <Circle/> : <TempComp/>/*  isAdmin ? <AdminRouter/> : <UserRouter/> */}
           </div>
           </Router>
