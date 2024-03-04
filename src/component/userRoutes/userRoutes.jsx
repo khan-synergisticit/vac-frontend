@@ -5,15 +5,14 @@ export const Page404 = lazy(() => import('../pages/pageNotFound.jsx'));
 
 // ----------------------------------------------------------------------
 
-export default function UserRouter() {
+export default function UserRouter({isAdmin}) {
   const routes = useRoutes([
     {
       element: (
-        {/* <DashboardLayout>
-          <Suspense>
-            <Outlet />
-          </Suspense>
-        </DashboardLayout> */}
+        
+        <Suspense>
+        <Outlet />
+      </Suspense>
       ),
       children: [
        // { element: <IndexPage />, index: true },
