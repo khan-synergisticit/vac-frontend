@@ -13,15 +13,17 @@ import {
   Card,
   
 } from "@aws-amplify/ui-react";
-
+import UserRouter from "../userRoutes/userRoutes.jsx";
+import AdminRouter from "../adminRoutes/adminRoutes.jsx";
 
 function ApplicationComponent({ signOut, user } ) {
   let [loading, setLoading] = useState(true);
-  let [color, setColor] = useState("#ffffff");
 
   let User = useSelector((state) => state.UserReducer.User);
   let dispatch = useDispatch();
   let userName = User && User.userName ? User.userName : "";
+  let isAdmin = true//User.role == "admin";
+
   useEffect(()=>{
     if(userName == ""){
       let newUser = {
@@ -61,7 +63,7 @@ function ApplicationComponent({ signOut, user } ) {
               position: 'absolute', left: '50%', top: '50%',
               transform: 'translate(-50%, -50%)'
           }}>
-          {userName == "" ? <Circle/> : <TempComp/>}
+          {userName == "" ? <Circle/> : isAdmin ? <AdminRouter/> : <UserRouter/>}
           </div>
             
           <FooterComponent/>
