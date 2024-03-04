@@ -70,7 +70,7 @@ function ApplicationComponent({ signOut, user } ) {
            {/*  <Suspense fallback={<Circle />}>
               <SomeComponent />
             </Suspense> */}
-          {userName == "" ? <Circle/> :  <UserRouter/> }
+          {userName == "" ? <Circle/> : <TempComp/>/*   <UserRouter/> */}
           </div>
           </Router>
           <FooterComponent/>
