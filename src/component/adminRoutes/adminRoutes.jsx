@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useRoutes, Outlet, Navigate,} from "react-router-dom";
 //export const Page404 = lazy(() => import('../pages/pageNotFound.jsx'));
 import NotFoundPage from '../pages/pageNotFound.jsx';
+
 // ----------------------------------------------------------------------
 
 export default function AdminRouter() {

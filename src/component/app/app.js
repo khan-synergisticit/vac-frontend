@@ -1,6 +1,6 @@
 import React, {useEffect, useState, Suspense} from "react";
 import ClipLoader from "react-spinners/ClipLoader";
-import logo from "./donkey.png";
+
 import "@aws-amplify/ui-react/styles.css";
 import HeaderComponent from "../header/header";
 import FooterComponent from "../footer/footer";
@@ -17,7 +17,6 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 import UserRouter from "../userRoutes/userRoutes.jsx";
-import AdminRouter from "../adminRoutes/adminRoutes.jsx";
 
 function ApplicationComponent({ signOut, user } ) {
   let [loading, setLoading] = useState(true);
@@ -63,16 +62,17 @@ function ApplicationComponent({ signOut, user } ) {
           <View className="App">
           <HeaderComponent signOut={signOut} userName={userName}/>
           <Router>
-            {isAdmin ? <AdminRouter/> : <UserRouter/>}
-          </Router>
+            
+         
           <div  style={{
               position: 'absolute', left: '50%', top: '50%',
               transform: 'translate(-50%, -50%)'
           }}>
           
-          {userName == "" ? <Circle/> : <TempComp/>}
+          {userName == "" ? <Circle/> : <UserRouter isAdmin={isAdmin}/>}
           
           </div>
+          </Router>
           <FooterComponent/>
         </View>
         );

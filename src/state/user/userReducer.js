@@ -1,4 +1,4 @@
-import { AddUserToStore } from "../actionTypes";
+import { AddUserDetailsToStore, AddUserToStore } from "../actionTypes";
 
 const User_State = {
   User: {
@@ -25,6 +25,8 @@ let UserReducer = (state = User_State, action) => {
   switch(action.type) {
       case AddUserToStore:
           return {...state, User:action.payload}
+      case AddUserDetailsToStore:
+          return {...state, UserDetails:action.payload}
       default:
           return state;
   }

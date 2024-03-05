@@ -4,6 +4,7 @@ import DashboardComponent from '../dashboard/dashboard.jsx';
 //export const Page404 = lazy(() => import('../pages/pageNotFound.jsx'));
 import NotFoundPage from '../pages/pageNotFound.jsx';
 import UserFormComponent from '../pages/userForm.jsx';
+import HomePage from '../pages/pageHome.jsx';
 // ----------------------------------------------------------------------
 
 export default function UserRouter({isAdmin}) {
@@ -11,7 +12,9 @@ export default function UserRouter({isAdmin}) {
   return (
     <Routes>
       <Route path="/*" element={<NotFoundPage/>}/>
-      <Route path="/userForm" element={<UserFormComponent/>}/>
+      <Route path="/" element={<Navigate replace to="/home" />} />
+      {isAdmin ? null : <Route path="/userForm" element={<UserFormComponent/>}/>}
+      <Route path='/home' element={<HomePage />}/>
     </Routes>
   )
   // const routes = useRoutes([

@@ -13,6 +13,13 @@ export const AddUserToStore = (newUser) => {
     }
 }
 
+export const AddUserDetailsToStore = (userDetails) => {
+  return {
+    type: ActionType.AddUserDetailsToStore,
+    payload: userDetails,
+  }
+}
+
 export const SaveUserToDB = (newUser)=>{
   return (dispatch)=>{
     axios.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/saveUser", newUser)
