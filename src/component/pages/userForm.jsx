@@ -10,26 +10,35 @@ let UserFormComponent =()=> {
     <Card>
       <div style={{padding:50}}>
       <Grid container spacing={2}>
+      <Grid item xs={6} md={8}>
+        <TextField
+            required
+            id="outlined-required"
+            label="Required"
+            defaultValue="Hello World"
+            fullWidth
+          />
+      </Grid>
+      <Grid item xs={6} md={8}>
+      <TextField
+              disabled
+              id="outlined-disabled"
+              label="Disabled"
+              defaultValue="Hello World"
+            />
+      </Grid>
         
-        <TextField
-          required
-          id="outlined-required"
-          label="Required"
-          defaultValue="Hello World"
-        />
-        <TextField
-          disabled
-          id="outlined-disabled"
-          label="Disabled"
-          defaultValue="Hello World"
-        />
-        <TextField
+      <Grid item xs={6} md={8}>
+          <TextField
           id="outlined-password-input"
           label="Password"
           type="password"
           autoComplete="current-password"
         />
-        <TextField
+      </Grid>
+        
+      <Grid item xs={6} md={8}>
+          <TextField
           id="outlined-read-only-input"
           label="Read Only"
           defaultValue="Hello World"
@@ -37,7 +46,10 @@ let UserFormComponent =()=> {
             readOnly: true,
           }}
         />
-        <TextField
+      </Grid>
+        
+      <Grid item xs={6} md={8}>
+          <TextField
           id="outlined-number"
           label="Number"
           type="number"
@@ -45,13 +57,21 @@ let UserFormComponent =()=> {
             shrink: true,
           }}
         />
-        <TextField id="outlined-search" label="Search field" type="search" />
+      </Grid>
+        
+      <Grid item xs={6} md={8}>
+          <TextField id="outlined-search" label="Search field" type="search" />
+      </Grid>
+        
+      <Grid item xs={6} md={8}>
         <TextField
           id="outlined-helperText"
           label="Helper text"
           defaultValue="Default Value"
           helperText="Some important text"
         />
+      </Grid>  
+
         </Grid>
       </div>
       
