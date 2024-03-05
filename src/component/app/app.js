@@ -25,7 +25,7 @@ function ApplicationComponent({ signOut, user } ) {
   let User = useSelector((state) => state.UserReducer.User);
   let dispatch = useDispatch();
   let userName = User && User.userName ? User.userName : "";
-  let isAdmin = true//User.role == "admin";
+  let isAdmin = User.role == "admin";
 
   useEffect(()=>{
     if(userName == ""){

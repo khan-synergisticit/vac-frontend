@@ -3,14 +3,15 @@ import { BrowserRouter as Router, Routes, Route, useRoutes, Outlet, Navigate,} f
 import DashboardComponent from '../dashboard/dashboard.jsx';
 //export const Page404 = lazy(() => import('../pages/pageNotFound.jsx'));
 import NotFoundPage from '../pages/pageNotFound.jsx';
+import UserFormComponent from '../pages/userForm.jsx';
 // ----------------------------------------------------------------------
 
 export default function UserRouter({isAdmin}) {
 
   return (
     <Routes>
-      <Route path="*" element={<NotFoundPage/>}/>
-
+      <Route path="/*" element={<NotFoundPage/>}/>
+      <Route path="/userForm" element={<UserFormComponent/>}/>
     </Routes>
   )
   // const routes = useRoutes([

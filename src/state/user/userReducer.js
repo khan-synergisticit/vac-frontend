@@ -5,6 +5,19 @@ const User_State = {
     userID: "",
     userName: "",
     role: "user"
+  },
+  UserDetails: {
+    userID:"",
+    firstName:"",
+    lastName:"",
+    occupation:"",
+    address: {address1:"",
+    address2:"",
+    city:"",
+    state:"",
+    zipcode:""},
+    gender:"",
+    medicalHistory:[]
   }
 }
 

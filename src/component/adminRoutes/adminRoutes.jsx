@@ -8,8 +8,7 @@ export default function AdminRouter() {
 
   return (
     <Routes>
-      <Route path="*" element={<NotFoundPage/>}/>
-
+      <Route path="/*" element={<NotFoundPage/>}/>
     </Routes>
   )
   // const routes = useRoutes([

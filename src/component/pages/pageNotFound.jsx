@@ -8,10 +8,6 @@ import NotFoundView from '../sections/error/notFoundView.jsx';
 export default function NotFoundPage() {
   return (
     <>
-      {/* <Helmet>
-        <title> 404 Page Not Found </title>
-      </Helmet> */}
-
       <NotFoundView />
     </>
   );
