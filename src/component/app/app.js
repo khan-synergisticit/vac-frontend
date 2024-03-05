@@ -60,22 +60,31 @@ function ApplicationComponent({ signOut, user } ) {
       }
         return(
           <View className="App">
-          <HeaderComponent signOut={signOut} userName={userName}/>
+          <HeaderComponent signOut={signOut} userName={userName} isAdmin={isAdmin}/>
+          <div  style={{
+              
+              display: "flex",
+              flexDirection: "column",
+              overflowY: "scroll"
+          }}>
           <Router>
             
          
-          <div  style={{
-              position: 'absolute', left: '50%', top: '50%',
-              transform: 'translate(-50%, -50%)'
-          }}>
+          
+
           
           {userName == "" ? <Circle/> : <UserRouter isAdmin={isAdmin}/>}
           
-          </div>
+          
           </Router>
+          </div>
           <FooterComponent/>
         </View>
         );
 }
 
 export default withAuthenticator(ApplicationComponent);
+
+
+// position: 'fixed', left: '50%', top: '50%',
+//               transform: 'translate(-50%, -50%)',

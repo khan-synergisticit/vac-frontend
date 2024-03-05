@@ -18,6 +18,8 @@ let UserFormComponent =()=> {
   let [firstName, setFirstName] = useState(userDetails.firstName);
   let [lastName, setLastName] = useState(userDetails.lastName);
   let [occupation, setOccupation] = useState(userDetails.occupation);
+  let [phone, setPhone] = useState(userDetails.phone);
+  let [email, setEmail] = useState(userDetails.email);
   let [gender, setGender] = useState(userDetails.gender);
 
   let [address1, setAddress1] = useState(userDetails.address.address1);
@@ -54,14 +56,15 @@ let UserFormComponent =()=> {
   }
 
   return (    
-    <Card>
+    <div >
+    <Card style={{width:600}}>
       <div style={{padding:50}}>
       <Grid container spacing={2} >
       <Grid item xs={12} md={12}>
         <TextField            
             id="first-name"
             label="First Name"            
-            style={{width:500}}
+            fullWidth
             defaultValue={firstName}
             onChange={(value)=>setFirstName(value.target.value)}
           />
@@ -70,19 +73,35 @@ let UserFormComponent =()=> {
       <TextField
               id="last-name"
               label="Last Name"
-              style={{width:500}}
+              fullWidth
               defaultValue={lastName}
               onChange={(value)=>setLastName(value.target.value)}
             />
       </Grid>
-        
+      
       <Grid item xs={12} md={12}>
-          <TextField
+      <TextField
+              id="phone"
+              label="Phone Number"
+              style={{width:200}}
+              defaultValue={phone}
+              onChange={(value)=>setPhone(value.target.value)}
+            />
+            <TextField
             id="occupation"
             label="Occupation"
-            style={{width:500}}
+            style={{width:300}}
             defaultValue={occupation}
             onChange={(value)=>setOccupation(value.target.value)}
+        />
+      </Grid>
+      <Grid item xs={12} md={12}>
+      <TextField
+            id="email"
+            label="Email"
+            fullWidth
+            defaultValue={email}
+            onChange={(value)=>setEmail(value.target.value)}
         />
       </Grid>
       <Grid item xs={12} md={12}>
@@ -96,7 +115,7 @@ let UserFormComponent =()=> {
               variant="standard"
               id="outlined-disabled"
               label="Address 1"
-              style={{width:500}}
+              fullWidth
               defaultValue={userDetails.address.address1}
               onChange={(value)=>setAddress1(value.target.value)}
             />
@@ -108,7 +127,7 @@ let UserFormComponent =()=> {
               label="Address 2"
               defaultValue={userDetails.address.address2}
               onChange={(value)=>setAddress2(value.target.value)}
-              style={{width:500}}
+              fullWidth
             />
         </Grid>
         <Grid item xs={12} md={12} >
@@ -151,6 +170,7 @@ let UserFormComponent =()=> {
       </div>
       
     </Card>
+    </div>
   );
 }
 

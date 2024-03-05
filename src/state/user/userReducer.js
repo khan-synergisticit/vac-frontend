@@ -11,6 +11,8 @@ const User_State = {
     firstName:"",
     lastName:"",
     occupation:"",
+    phone:"",
+    email:"",
     address: {address1:"",
     address2:"",
     city:"",
