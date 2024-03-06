@@ -10,6 +10,8 @@ import Dropdown from '@mui/joy/Dropdown';
 import { useSelector, useDispatch } from 'react-redux';
 import { AddUserDetailsToStore } from '../../state/user/userAction';
 
+import { SaveUserDetailsToDB } from '../../state/user/userAction';
+
 
 let UserFormComponent =()=> {
   let user = useSelector((state) => state.UserReducer.User);
@@ -50,7 +52,7 @@ let UserFormComponent =()=> {
       gender: gender,
       medicalHistory: []
     }
-
+    dispatch(SaveUserDetailsToDB(userDetails));
     dispatch(AddUserDetailsToStore(userDetails));
 
   }
