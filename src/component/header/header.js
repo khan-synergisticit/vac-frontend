@@ -11,7 +11,7 @@ export default function HeaderComponent({ signOut, userName, isAdmin }) {
     <Box sx={{ flexGrow: 1, top: 0, position: 'sticky', width: '100%' }}>
       <AppBar position="sticky">
         <Toolbar>
-          <TemporaryDrawer isAdmin={isAdmin}/>
+          <TemporaryDrawer isAdmin={isAdmin} userName={userName}/>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {userName}
           </Typography>

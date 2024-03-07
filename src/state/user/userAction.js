@@ -21,14 +21,26 @@ export const AddUserDetailsToStore = (userDetails) => {
 }
 
 export const SaveUserDetailsToDB = (userDetails)=>{
+   let header ={
+      headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Access-Control-Allow-Origin": "*",
+      }
+    }
   return (dispatch) =>{
+     console.log("SaveUserDetailsToDB: 0")
     //axios.post("http://localhost:8080/userDetails/find", userDetails.userID)
-    axios.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find", userDetails.userID)
+    axios.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find", userDetails, header)
+  
     .then((data)=>{
+       console.log("SaveUserDetailsToDB: 1")
       if(data.data == null){
+        
+         console.log("SaveUserDetailsToDB: 2")
         //axios.post("http://localhost:8080/userDetails/save", userDetails)
-        axios.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails)
+        axios.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
         .then((data)=>{
+           console.log("SaveUserDetailsToDB: 3")
           let savedDetails = data.data;
           dispatch(fetchUserDetailsFromDB(savedDetails.userID));
         })
@@ -36,8 +48,9 @@ export const SaveUserDetailsToDB = (userDetails)=>{
           console.log("Save User details to DB Error: " + error)
         })
       } else {
+         console.log("SaveUserDetailsToDB: 4")
         //axios.put("http://localhost:8080/userDetails/update", userDetails)
-        axios.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/update", userDetails)
+        axios.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/update", userDetails, header)
         .then((data) => {
           let savedUser = data.data;
           dispatch(FetchUserFromDB(savedUser.userID)) 
@@ -142,7 +155,7 @@ export const fetchUserDetailsFromDB = (userDetails) =>{
       }
     }
     //axiosInstance.post("http://localhost:8080/userDetails/find", userDetails, header)
-    axiosInstance.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find", userDetails, header)
+    axiosInstance.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find", userDetails.userID, header)
     .then((data)=>{
       let details = data.data;
       console.log("Fet userDetails: " + JSON.stringify(data.data))

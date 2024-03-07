@@ -60,6 +60,7 @@ function ApplicationComponent({ signOut, user } ) {
       }
         return(
           <View className="App">
+          <Router>
           <HeaderComponent signOut={signOut} userName={userName} isAdmin={isAdmin}/>
           <div  style={{
               
@@ -67,18 +68,14 @@ function ApplicationComponent({ signOut, user } ) {
               flexDirection: "column",
               overflowY: "scroll"
           }}>
-          <Router>
-            
-         
-          
-
           
           {userName == "" ? <Circle/> : <UserRouter isAdmin={isAdmin}/>}
           
           
-          </Router>
+         
           </div>
           <FooterComponent/>
+           </Router>
         </View>
         );
 }
