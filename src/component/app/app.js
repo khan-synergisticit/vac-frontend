@@ -36,8 +36,6 @@ function ApplicationComponent({ signOut, user } ) {
       dispatch(FetchUserFromDB(newUser));
     }
   }, [])
-      console.log("userName: " + JSON.stringify(userName))
-
       let TempComp = () =>{
         return (
           <Card>
