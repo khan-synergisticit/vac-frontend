@@ -48,7 +48,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
         if (error.response && [301, 302].includes(error.response.status)) {
           const redirectUrl = error.response.headers.location;
           console.log("1")
-          //dispatch(UpdateUserDetailsToDB(error.response.data));          
+          dispatch(UpdateUserDetailsToDB(error.response.data));          
           return axiosInstance2.get(redirectUrl);
         }
         return Promise.reject(error);
@@ -81,6 +81,8 @@ export const SaveUserDetailsToDB = (userDetails)=>{
         } else if(error.response.status == 301 || error.response.status== 302){
           console.log("5")
           console.log("REsponse status: "+ error.response.status);
+        } else {
+          console.log("ERROR: " + error)
         }
       }
      
