@@ -122,6 +122,7 @@ export const fetchUserDetailsFromDB = (userDetails) =>{
     .catch((error)=>{
       if(error.response.status == 301 || error.response.status == 302 ){
         console.log("Fetch user from DB Error: " + error);
+        dispatch(AddUserDetailsToStore(error.response.data))
       }
       //console.log("Fetch user from DB Error: " + error);
     });
