@@ -60,7 +60,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
     axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userID}`)
     .then((data)=>{
       let details = data.data;
-      console.log("Fet userDetails: " + JSON.stringify(data))
+      console.log("Fet userDetails: " )
       
     })
     .catch((error)=>{
