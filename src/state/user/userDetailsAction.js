@@ -49,7 +49,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
     })
     .catch((error)=>{
       
-      console.log("Fetch user from DB Error 2: " + error.response.status);
+      console.log("Fetch user from DB Error 2: " + typeof(error.response.status));
      
     });
   }
