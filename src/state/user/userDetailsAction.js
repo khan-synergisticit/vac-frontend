@@ -35,11 +35,11 @@ export const SaveUserDetailsToDB = (userDetails)=>{
           axiosInstance3.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/update", userDetails, header)
           .then((data)=>{
             let updated = data.data;
-            console.log("UPDATED " + updated)
+            console.log("UPDATED " + JSON.stringify(updated))
             console.log("Add UserDetails to store 2: " + JSON.stringify(error.response.data));          
             dispatch(AddUserDetailsToStore(userDetails))
-          }).catch((error)=>{
-            console.log("Eror updating user details: " + error)
+          }).catch((error1)=>{
+            console.log("Eror updating user details: " + error1)
           })
           
           return axiosInstance2.get(redirectUrl);
