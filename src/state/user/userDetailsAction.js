@@ -64,7 +64,8 @@ export const SaveUserDetailsToDB = (userDetails)=>{
       
     })
     .catch((error)=>{
-      console.log("2")
+      console.log("2: " + error)
+      
       if(error.response.status == 404){
         console.log("4")
         axiosInstance.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
