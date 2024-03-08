@@ -13,6 +13,17 @@ export const AddUserDetailsToStore = (userDetails) => {
 
 
 export const SaveUserDetailsToDB = (userDetails)=>{
+  
+ 
+  let userID = JSON.stringify(userDetails.userID);
+  console.log("userDetails.userID " + userID);
+  let header ={
+     headers: {
+         'Content-Type': 'application/x-www-form-urlencoded',
+         "Access-Control-Allow-Origin": "*",
+     }
+   }
+ return (dispatch) =>{
   axiosInstance.defaults.maxRedirects = 0; 
     axiosInstance.interceptors.response.use(
       response => response,
@@ -27,16 +38,6 @@ export const SaveUserDetailsToDB = (userDetails)=>{
         return Promise.reject(error);
       }
     );
- 
-  let userID = JSON.stringify(userDetails.userID);
-  console.log("userDetails.userID " + userID);
-  let header ={
-     headers: {
-         'Content-Type': 'application/x-www-form-urlencoded',
-         "Access-Control-Allow-Origin": "*",
-     }
-   }
- return (dispatch) =>{
    //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails.userID}`)
    axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userID}`)
  
