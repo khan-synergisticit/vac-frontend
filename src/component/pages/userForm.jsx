@@ -42,20 +42,19 @@ let UserFormComponent =()=> {
 
     let userDetail = {
       userID: user.userID,
-      firstName: firstName,
-      lastName: lastName,
-      occupation: occupation,
-      email:email,
-      phone:phone,
-      gender: gender,
-      address1: address1,
-      address2: address2,
-      city: city,
-      state: state,
-      zipcode: zipcode
+      firstName: firstName ?? userDetails.firstName,
+      lastName: lastName ?? userDetails.lastName,
+      occupation: occupation ?? userDetails.occupation,
+      email:email ?? userDetails.email,
+      phone:phone ?? userDetails.phone,
+      gender: gender ?? userDetails.gender,
+      address1: address1 ?? userDetails.address1,
+      address2: address2 ?? userDetails.address2,
+      city: city ?? userDetails.city,
+      state: state ?? userDetails.state,
+      zipcode: zipcode ?? userDetails.zipcode
     }
-    let details = {...userDetail, ...userDetails}
-    dispatch(SaveUserDetailsToDB(details));
+    dispatch(SaveUserDetailsToDB(userDetail));
     dispatch(AddUserDetailsToStore(details));
 
   }
