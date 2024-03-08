@@ -22,7 +22,7 @@ export const UpdateUserDetailsToDB = (userDetails) => {
     axiosInstance.post("/userDetails/update", userDetails, header)
           .then((data)=>{
             console.log("Add UserDetails to store 2: " + JSON.stringify(data.data));          
-            dispatch(AddUserDetailsToStore(data.data))
+            dispatch(AddUserDetailsToStore(userDetails))
           }).catch((error1)=>{
             console.log("Eror updating user details: " + error1)
           })
