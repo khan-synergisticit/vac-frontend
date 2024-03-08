@@ -2,7 +2,7 @@ import * as ActionType from "../actionTypes";
 import axios from "axios";
 
 const axiosInstance = axios.create();
-
+const axiosInstance2 = axios.create();
 export const AddUserDetailsToStore = (userDetails) => {
   return {
     type: ActionType.AddUserDetailsToStore,
@@ -17,8 +17,8 @@ export const SaveUserDetailsToDB = (userDetails)=>{
  
   let userID = userDetails.userID;
   return (dispatch)=>{
-    axiosInstance.defaults.maxRedirects = 0; 
-    axiosInstance.interceptors.response.use(
+    axiosInstance2.defaults.maxRedirects = 0; 
+    axiosInstance2.interceptors.response.use(
       response => response,
       error => {
       
@@ -26,7 +26,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
           const redirectUrl = error.response.headers.location;
           console.log("Add UserDetails to store 2: " + JSON.stringify(error.response.data));
           dispatch(AddUserDetailsToStore(error.response.data))
-          return axiosInstance.get(redirectUrl);
+          return axiosInstance2.get(redirectUrl);
         }
         return Promise.reject(error);
       }
@@ -40,7 +40,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
     }
     console.log("fetchUserDetailsFromDB2 : " + typeof(userID) + " " + userID)
     //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails}`)
-    axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userID}`)
+    axiosInstance2.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userID}`)
     .then((data)=>{
       let details = data.data;
       console.log("Fet userDetails: " + JSON.stringify(data))
