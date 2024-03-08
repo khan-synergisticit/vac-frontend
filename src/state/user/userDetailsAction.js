@@ -28,7 +28,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
       }
     );
  
-  let userID = JSON.stringify(userDetails.userID);
+  let userID = String(userDetails.userID);
   console.log("userDetails.userID " + userDetails.userID);
   let header ={
      headers: {
@@ -38,7 +38,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
    }
  return (dispatch) =>{
    //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails.userID}`)
-   axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userID}`, {headers:header})
+   axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userID}`)
  
    .then((data)=>{
     console.log("DATA: " + JSON.stringify(data.data))
