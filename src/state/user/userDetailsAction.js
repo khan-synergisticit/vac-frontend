@@ -21,7 +21,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
      }
    }
  return (dispatch) =>{
-    console.log("SaveUserDetailsToDB: 0 " + userDetails.userID)
+
     //axiosInstance.post("http://localhost:8080/userDetails/save", userDetails, header)
     /* axiosInstance.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
        .then((data)=>{
@@ -36,7 +36,6 @@ export const SaveUserDetailsToDB = (userDetails)=>{
    axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userDetails.userID}`)
  
    .then((data)=>{
-      console.log("SaveUserDetailsToDB: 1" + JSON.stringify(data.data))
      if(data.data == null){
        
         console.log("SaveUserDetailsToDB: 2")
