@@ -17,6 +17,12 @@ export const SaveUserDetailsToDB = (userDetails)=>{
  
   let userID = userDetails.userID;
   return (dispatch)=>{
+    let header ={
+      headers: {
+          'Content-Type': 'application/json',
+          "Access-Control-Allow-Origin": "*",
+      }
+    }
     axiosInstance2.defaults.maxRedirects = 0; 
     axiosInstance2.interceptors.response.use(
       response => response,
@@ -24,7 +30,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
         
         if (error.response && [301, 302].includes(error.response.status)) {
           const redirectUrl = error.response.headers.location;
-          axiosInstance2.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", error.response.data, header)
+          axiosInstance2.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
           .then((data)=>{
             let updated = data.data;
             console.log("Add UserDetails to store 2: " + JSON.stringify(updated));          
@@ -39,12 +45,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
       }
     );
  
-    let header ={
-      headers: {
-          'Content-Type': 'application/json',
-          "Access-Control-Allow-Origin": "*",
-      }
-    }
+    
     console.log("fetchUserDetailsFromDB2 : " + typeof(userID) + " " + userID)
     //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails}`)
     axiosInstance2.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userID}`)
