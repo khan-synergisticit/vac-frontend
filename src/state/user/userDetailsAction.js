@@ -13,6 +13,21 @@ export const AddUserDetailsToStore = (userDetails) => {
 
 
 export const SaveUserDetailsToDB = (userDetails)=>{
+  axiosInstance.defaults.maxRedirects = 0; 
+    axiosInstance.interceptors.response.use(
+      response => response,
+      error => {
+      
+        if (error.response && [301, 302].includes(error.response.status)) {
+          const redirectUrl = error.response.headers.location;
+          console.log("Add UserDetails to store: " + JSON.stringify(error.response.data));
+          dispatch(AddUserDetailsToStore(error.response.data))
+          return axiosInstance.get(redirectUrl);
+        }
+        return Promise.reject(error);
+      }
+    );
+ 
   let userID = userDetails.userID;
   let header ={
      headers: {
