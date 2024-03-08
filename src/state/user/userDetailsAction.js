@@ -40,20 +40,6 @@ export const SaveUserDetailsToDB = (userDetails)=>{
           "Access-Control-Allow-Origin": "*",
       }
     }
-    axiosInstance.defaults.maxRedirects = 0; 
-    axiosInstance.interceptors.response.use(
-      response => response,
-      error => {
-        if (error.response && [301, 302].includes(error.response.status)) {
-          const redirectUrl = error.response.headers.location;
-          // console.log("1")
-          // dispatch(UpdateUserDetailsToDB(error.response.data));          
-          return axiosInstance.get(redirectUrl);
-        }
-        return Promise.reject(error);
-      }
-    );
- 
     
     //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails}`)
     axiosInstance.get(`/userDetails/find?userID=${userID}`)
@@ -63,11 +49,9 @@ export const SaveUserDetailsToDB = (userDetails)=>{
       
     })
     .catch((error)=>{
-      console.log("2: " + error)
-      
+      console.log("2: " + error)      
       if(error.response.status == 404){
-        console.log("4")
-        axiosInstance.put("userDetails/save", userDetails, header)
+             axiosInstance.put("userDetails/save", userDetails, header)
         .then((data)=>{
           let details = data.data;
           dispatch(AddUserDetailsToStore(details));
@@ -77,8 +61,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
           console.log("Failed to save User Details: " + error2);
         })
       } else if(error.response.status == 301 || error.response.status== 302){
-        console.log("5")
-        console.log("REsponse status: "+ error.response.status);
+        dispatch(UpdateUserDetailsToDB(userDetails));
       } else {
         console.log("ERROR: " + error)
       }
