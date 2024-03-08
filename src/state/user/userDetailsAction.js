@@ -41,15 +41,15 @@ export const SaveUserDetailsToDB = (userDetails)=>{
           "Access-Control-Allow-Origin": "*",
       }
     }
-    axiosInstance2.defaults.maxRedirects = 0; 
-    axiosInstance2.interceptors.response.use(
+    axiosInstance.defaults.maxRedirects = 0; 
+    axiosInstance.interceptors.response.use(
       response => response,
       error => {
         if (error.response && [301, 302].includes(error.response.status)) {
           const redirectUrl = error.response.headers.location;
           console.log("1")
           dispatch(UpdateUserDetailsToDB(error.response.data));          
-          return axiosInstance2.get(redirectUrl);
+          return axiosInstance.get(redirectUrl);
         }
         return Promise.reject(error);
       }
@@ -57,35 +57,31 @@ export const SaveUserDetailsToDB = (userDetails)=>{
  
     
     //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails}`)
-    axiosInstance2.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userID}`)
+    axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userID}`)
     .then((data)=>{
       let details = data.data;
       console.log("Fet userDetails: " + JSON.stringify(data))
       
     })
     .catch((error)=>{
-      console.log("2")
-      if(error.response.status != undefined){
-        console.log("3")
-        if(error.response.status == 404){
-          console.log("4")
-          axiosInstance2.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
-          .then((data)=>{
-            let details = data.data;
-            dispatch(AddUserDetailsToStore(details));
-            console.log("Saved UserDetials to DB: " + JSON.stringify(details));
-          })
-          .catch((error2)=>{
-            console.log("Failed to save User Details: " + error2);
-          })
-        } else if(error.response.status == 301 || error.response.status== 302){
-          console.log("5")
-          console.log("REsponse status: "+ error.response.status);
-        } else {
-          console.log("ERROR: " + error)
-        }
+      if(error.response.status == 404){
+        console.log("4")
+        axiosInstance.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
+        .then((data)=>{
+          let details = data.data;
+          dispatch(AddUserDetailsToStore(details));
+          console.log("Saved UserDetials to DB: " + JSON.stringify(details));
+        })
+        .catch((error2)=>{
+          console.log("Failed to save User Details: " + error2);
+        })
+      } else if(error.response.status == 301 || error.response.status== 302){
+        console.log("5")
+        console.log("REsponse status: "+ error.response.status);
+      } else {
+        console.log("ERROR: " + error)
       }
-     
+      
     });
   }
 }
