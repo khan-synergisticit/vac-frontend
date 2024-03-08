@@ -27,7 +27,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
     axiosInstance2.interceptors.response.use(
       response => response,
       error => {
-        
+        console.log("error.response.status " + error.response.status)
         if (error.response && [301, 302].includes(error.response.status)) {
           const redirectUrl = error.response.headers.location;
           axiosInstance2.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/update", userDetails, header)
