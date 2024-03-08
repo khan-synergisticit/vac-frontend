@@ -38,7 +38,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
           "Access-Control-Allow-Origin": "*",
       }
     }
-    console.log("fetchUserDetailsFromDB : " + JSON.stringify(userDetails))
+    console.log("fetchUserDetailsFromDB2 : " + typeof(userID) + " " + userID)
     //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails}`)
     axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userID}`)
     .then((data)=>{
@@ -76,7 +76,7 @@ export const fetchUserDetailsFromDB = (userDetails) =>{
           "Access-Control-Allow-Origin": "*",
       }
     }
-    console.log("fetchUserDetailsFromDB : " + JSON.stringify(userDetails))
+    console.log("fetchUserDetailsFromDB : " + typeof(userDetails) + " " + userDetails)
     //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails}`)
     axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userDetails}`)
     .then((data)=>{
