@@ -30,9 +30,10 @@ export const SaveUserDetailsToDB = (userDetails)=>{
         
         if (error.response && [301, 302].includes(error.response.status)) {
           const redirectUrl = error.response.headers.location;
-          axiosInstance2.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/update", error.response.data, header)
+          axiosInstance2.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/update", userDetails, header)
           .then((data)=>{
             let updated = data.data;
+            console.log("UPDATED " + updated)
             console.log("Add UserDetails to store 2: " + JSON.stringify(error.response.data));          
             dispatch(AddUserDetailsToStore(error.response.data))
           }).catch((error)=>{
