@@ -30,7 +30,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
         
         if (error.response && [301, 302].includes(error.response.status)) {
           const redirectUrl = error.response.headers.location;
-          axiosInstance2.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/update", error.response.data, header)
+          axiosInstance2.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/update", userDetails, header)
           .then((data)=>{
             let updated = data.data;
             console.log("Add UserDetails to store 2: " + JSON.stringify(error.response.data));          
@@ -85,7 +85,7 @@ export const fetchUserDetailsFromDB = (userDetails) =>{
       
         if (error.response && [301, 302].includes(error.response.status)) {
           const redirectUrl = error.response.headers.location;
-          console.log("Add UserDetails to store: " + JSON.stringify(error.response.data));
+          //console.log("Add UserDetails to store: " + JSON.stringify(error.response.data));
           dispatch(AddUserDetailsToStore(error.response.data))
           return axiosInstance.get(redirectUrl);
         }
@@ -104,11 +104,11 @@ export const fetchUserDetailsFromDB = (userDetails) =>{
     axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userDetails}`)
     .then((data)=>{
       let details = data.data;
-      console.log("Fet userDetails: " + JSON.stringify(data))
+      //.log("Fet userDetails: " + JSON.stringify(data))
       dispatch(AddUserDetailsToStore(details));
     })
     .catch((error)=>{
-      console.log("Fetch user from DB Error: " + error);
+      //console.log("Fetch user from DB Error: " + error);
     });
   }
 }
