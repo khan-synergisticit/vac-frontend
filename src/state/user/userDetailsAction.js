@@ -47,7 +47,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
       error => {
         if (error.response && [301, 302].includes(error.response.status)) {
           const redirectUrl = error.response.headers.location;
-          console.log("2")
+          console.log("1")
           //dispatch(UpdateUserDetailsToDB(error.response.data));          
           return axiosInstance2.get(redirectUrl);
         }
@@ -66,8 +66,9 @@ export const SaveUserDetailsToDB = (userDetails)=>{
     .catch((error)=>{
       console.log("2")
       if(error.response.status != undefined){
-        console.log("2")
+        console.log("3")
         if(error.response.status == 404){
+          console.log("4")
           axiosInstance2.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
           .then((data)=>{
             let details = data.data;
@@ -78,6 +79,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
             console.log("Failed to save User Details: " + error2);
           })
         } else if(error.response.status == 301 || error.response.status== 302){
+          console.log("5")
           console.log("REsponse status: "+ error.response.status);
         }
       }
