@@ -56,7 +56,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
     })
     .catch((error)=>{
       
-      console.log("Fetch user from DB Error 2: " + error);
+      console.log("Fetch user from DB Error 2: " + error + " " + error.response.status);
       if(error.response.status != undefined){
         if(error.response.status == 404){
           axiosInstance2.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
