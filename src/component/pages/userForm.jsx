@@ -37,7 +37,7 @@ let UserFormComponent =()=> {
   let selectGender = (genders) =>{
     setGender(genders);   
   }
-  console.log("USER DETAILS: " + JSON.stringify(userDetails));
+  //console.log("USER DETAILS: " + JSON.stringify(userDetails));
   let onSubmit = () =>{
 
     let userDetail = {
