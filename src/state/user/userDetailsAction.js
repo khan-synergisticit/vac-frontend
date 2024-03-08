@@ -57,7 +57,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
       
       console.log("Fetch user from DB Error 2: " + error);
       if(error.response.status == 404){
-        axiosInstance.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
+        axiosInstance2.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
         .then((data)=>{
           let details = data.data;
           dispatch(AddUserDetailsToStore(details));
