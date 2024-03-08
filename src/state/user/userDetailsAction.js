@@ -24,9 +24,15 @@ export const SaveUserDetailsToDB = (userDetails)=>{
         
         if (error.response && [301, 302].includes(error.response.status)) {
           const redirectUrl = error.response.headers.location;
-          console.log("Add UserDetails to store 2: " + JSON.stringify(error.response.data));
+          axiosInstance2.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", error.response.data, header)
+          .then((data)=>{
+            let updated = data.data;
+            console.log("Add UserDetails to store 2: " + JSON.stringify(updated));          
+            dispatch(AddUserDetailsToStore(error.response.data))
+          }).catch((error)=>{
+            console.log("Eror updating user details: " + error)
+          })
           
-          dispatch(AddUserDetailsToStore(error.response.data))
           return axiosInstance2.get(redirectUrl);
         }
         return Promise.reject(error);
@@ -45,11 +51,22 @@ export const SaveUserDetailsToDB = (userDetails)=>{
     .then((data)=>{
       let details = data.data;
       console.log("Fet userDetails: " + JSON.stringify(data))
-      dispatch(AddUserDetailsToStore(details));
+      
     })
     .catch((error)=>{
       
-      console.log("Fetch user from DB Error 2: " + typeof(error.response.status));
+      console.log("Fetch user from DB Error 2: " + error);
+      if(error.response.status == 404){
+        axiosInstance.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
+        .then((data)=>{
+          let details = data.data;
+          dispatch(AddUserDetailsToStore(details));
+          console.log("Saved UserDetials to DB: " + JSON.stringify(details));
+        })
+        .catch((error)=>{
+          console.log("Failed to save User Details: " + error);
+        })
+      }
      
     });
   }
