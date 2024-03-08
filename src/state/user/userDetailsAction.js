@@ -31,6 +31,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
         console.log("error.response.status " + error.response.status)
         if (error.response && [301, 302].includes(error.response.status)) {
           const redirectUrl = error.response.headers.location;
+          console.log("1")
           axiosInstance3.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/update", userDetails, header)
           .then((data)=>{
             let updated = data.data;
