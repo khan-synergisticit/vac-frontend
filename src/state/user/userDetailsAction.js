@@ -1,9 +1,8 @@
 import * as ActionType from "../actionTypes";
 import axios from "axios";
 
-const axiosInstance = axios.create();
-const axiosInstance2 = axios.create();
-const axiosInstance3 = axios.create();
+const axiosInstance = axios.create({baseURL:"http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/"});
+
 export const AddUserDetailsToStore = (userDetails) => {
   return {
     type: ActionType.AddUserDetailsToStore,
@@ -20,7 +19,7 @@ export const UpdateUserDetailsToDB = (userDetails) => {
           "Access-Control-Allow-Origin": "*",
       }
     }
-    axiosInstance2.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/update", userDetails, header)
+    axiosInstance.post("/userDetails/update", userDetails, header)
           .then((data)=>{
             console.log("Add UserDetails to store 2: " + JSON.stringify(data.data));          
             dispatch(AddUserDetailsToStore(data.data))
@@ -57,7 +56,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
  
     
     //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails}`)
-    axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userID}`)
+    axiosInstance.get(`/userDetails/find?userID=${userID}`)
     .then((data)=>{
       let details = data.data;
       console.log("Fet userDetails: " )
@@ -68,7 +67,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
       
       if(error.response.status == 404){
         console.log("4")
-        axiosInstance.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
+        axiosInstance.put("userDetails/save", userDetails, header)
         .then((data)=>{
           let details = data.data;
           dispatch(AddUserDetailsToStore(details));
@@ -91,7 +90,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
 
 export const fetchUserDetailsFromDB = (userDetails) =>{
   return (dispatch)=>{
-    axiosInstance.defaults.maxRedirects = 0; 
+    /* axiosInstance.defaults.maxRedirects = 0; 
     axiosInstance.interceptors.response.use(
       response => response,
       error => {
@@ -104,7 +103,7 @@ export const fetchUserDetailsFromDB = (userDetails) =>{
         }
         return Promise.reject(error);
       }
-    );
+    ); */
  
     let header ={
       headers: {
@@ -114,13 +113,16 @@ export const fetchUserDetailsFromDB = (userDetails) =>{
     }
     console.log("fetchUserDetailsFromDB : " + typeof(userDetails) + " " + userDetails)
     //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails}`)
-    axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userDetails}`)
+    axiosInstance.get(`userDetails/find?userID=${userDetails}`)
     .then((data)=>{
       let details = data.data;
       //.log("Fet userDetails: " + JSON.stringify(data))
       dispatch(AddUserDetailsToStore(details));
     })
     .catch((error)=>{
+      if(error.response.status == 301 || error.response.status == 302 ){
+        console.log("Fetch user from DB Error: " + error);
+      }
       //console.log("Fetch user from DB Error: " + error);
     });
   }
