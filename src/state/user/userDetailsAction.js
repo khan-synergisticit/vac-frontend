@@ -66,6 +66,8 @@ export const SaveUserDetailsToDB = (userDetails)=>{
         .catch((error2)=>{
           console.log("Failed to save User Details: " + error2);
         })
+      } else if(error.response.status == 301 || error.response.status== 302){
+        console.log("REsponse status: "+ error.response.status);
       }
      
     });
