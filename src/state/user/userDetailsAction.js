@@ -12,9 +12,26 @@ export const AddUserDetailsToStore = (userDetails) => {
 }
 
 
+export const UpdateUserDetailsToDB = (userDetails) => {
+  return (dispatch) =>{
+    let header ={
+      headers: {
+          'Content-Type': 'application/json',
+          "Access-Control-Allow-Origin": "*",
+      }
+    }
+    axiosInstance2.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/update", userDetails, header)
+          .then((data)=>{
+            console.log("Add UserDetails to store 2: " + JSON.stringify(data.data));          
+            dispatch(AddUserDetailsToStore())
+          }).catch((error1)=>{
+            console.log("Eror updating user details: " + error1)
+          })
+  }
+}
 
-export const SaveUserDetailsToDB = (userDetails)=>{
-  
+
+export const SaveUserDetailsToDB = (userDetails)=>{  
  
   let userID = userDetails.userID;
   return (dispatch)=>{
@@ -30,14 +47,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
       error => {
         if (error.response && [301, 302].includes(error.response.status)) {
           const redirectUrl = error.response.headers.location;
-          axiosInstance2.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
-          .then((data)=>{
-            console.log("Add UserDetails to store 2: " + JSON.stringify(error.response.data));          
-            dispatch(AddUserDetailsToStore(error.response.data))
-          }).catch((error1)=>{
-            console.log("Eror updating user details: " + error1)
-          })
-          
+          dispatch(UpdateUserDetailsToDB(error.response.data));          
           return axiosInstance2.get(redirectUrl);
         }
         return Promise.reject(error);
@@ -55,7 +65,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
     .catch((error)=>{
       
       if(error.response.status == 404){
-        axiosInstance2.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
+        axiosInstance2.put("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
         .then((data)=>{
           let details = data.data;
           dispatch(AddUserDetailsToStore(details));
