@@ -37,7 +37,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
             let updated = data.data;
             console.log("UPDATED " + updated)
             console.log("Add UserDetails to store 2: " + JSON.stringify(error.response.data));          
-            dispatch(AddUserDetailsToStore(error.response.data))
+            dispatch(AddUserDetailsToStore(userDetails))
           }).catch((error)=>{
             console.log("Eror updating user details: " + error)
           })

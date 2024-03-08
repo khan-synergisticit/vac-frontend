@@ -55,7 +55,7 @@ let UserFormComponent =()=> {
       zipcode: zipcode ?? userDetails.zipcode
     }
     dispatch(SaveUserDetailsToDB(userDetail));
-    dispatch(AddUserDetailsToStore(details));
+    dispatch(AddUserDetailsToStore(userDetail));
 
   }
 
