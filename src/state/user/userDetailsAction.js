@@ -29,6 +29,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
     );
  
   let userID = userDetails.userID;
+  console.log("userDetails.userID " + userDetails.userID);
   let header ={
      headers: {
          'Content-Type': 'application/x-www-form-urlencoded',
