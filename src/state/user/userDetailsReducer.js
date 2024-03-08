@@ -8,7 +8,11 @@ const User_State = {
     occupation:"",
     phone:"",
     email:"",
-    medicalHistory:[]
+    address1:"",
+    address2:"",
+    city:"",
+    state:"",
+    zipCode:""
   }
 }
 

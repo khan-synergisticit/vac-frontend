@@ -23,7 +23,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
  return (dispatch) =>{
     console.log("SaveUserDetailsToDB: 0")
     //axiosInstance.post("http://localhost:8080/userDetails/save", userDetails, header)
-       axiosInstance.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
+    axiosInstance.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
        .then((data)=>{
           console.log("SaveUserDetailsToDB: 3")
          let savedDetails = data.data;
