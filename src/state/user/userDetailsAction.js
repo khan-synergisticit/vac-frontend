@@ -28,7 +28,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
       }
     );
  
-  let userID = userDetails.userID;
+  let userID = JSON.stringify(userDetails.userID);
   console.log("userDetails.userID " + userDetails.userID);
   let header ={
      headers: {
