@@ -41,19 +41,19 @@ export const SaveUserDetailsToDB = (userDetails)=>{
           "Access-Control-Allow-Origin": "*",
       }
     }
-    axiosInstance.defaults.maxRedirects = 0; 
-    axiosInstance.interceptors.response.use(
-      response => response,
-      error => {
-        if (error.response && [301, 302].includes(error.response.status)) {
-          const redirectUrl = error.response.headers.location;
-          console.log("1")
-          dispatch(UpdateUserDetailsToDB(error.response.data));          
-          return axiosInstance.get(redirectUrl);
-        }
-        return Promise.reject(error);
-      }
-    );
+    // axiosInstance.defaults.maxRedirects = 0; 
+    // axiosInstance.interceptors.response.use(
+    //   response => response,
+    //   error => {
+    //     if (error.response && [301, 302].includes(error.response.status)) {
+    //       const redirectUrl = error.response.headers.location;
+    //       console.log("1")
+    //       dispatch(UpdateUserDetailsToDB(error.response.data));          
+    //       return axiosInstance.get(redirectUrl);
+    //     }
+    //     return Promise.reject(error);
+    //   }
+    // );
  
     
     //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails}`)
