@@ -92,7 +92,7 @@ export const fetchUserDetailsFromDB = (userDetails) =>{
     }
     console.log("fetchUserDetailsFromDB : " + JSON.stringify(userDetails))
     //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails}`)
-    axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/find?userID=${userDetails}`)
+    axiosInstance.get(`http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/find?userID=${userDetails}`)
     .then((data)=>{
       let details = data.data;
       console.log("Fet userDetails: " + JSON.stringify(data))
