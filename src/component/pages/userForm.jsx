@@ -8,7 +8,7 @@ import MenuButton from '@mui/joy/MenuButton';
 import MenuItem from '@mui/joy/MenuItem';
 import Dropdown from '@mui/joy/Dropdown';
 import { useSelector, useDispatch } from 'react-redux';
-import { AddUserDetailsToStore, SaveUserDetailsToDB, fetchUserDetailsFromDB } from '../../state/user/userDetailsAction';
+import { AddUserDetailsToStore, SaveUserDetailsToDB, FetchUserDetailsFromDB } from '../../state/user/userDetailsAction';
 import { Input } from '@aws-amplify/ui-react';
 
 
@@ -30,7 +30,7 @@ let UserFormComponent =()=> {
   let [zipcode, setZipCode] = useState(userDetails.zipcode ?? "");
 
   useEffect(()=>{
-    dispatch(fetchUserDetailsFromDB(user.userID))
+    dispatch(FetchUserDetailsFromDB(user.userID))
 
   }, [])
 

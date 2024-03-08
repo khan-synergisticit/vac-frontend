@@ -13,7 +13,8 @@ const User_State = {
     city:"",
     state:"",
     zipCode:""
-  }
+  },
+  AllUserDetails:[]
 }
 
 let UserDetailsReducer = (state = User_State, action) => {

@@ -2,6 +2,7 @@ import * as ActionType from "../actionTypes";
 import axios from "axios";
 
 const axiosInstance = axios.create({baseURL:"http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/"});
+//const axiosInstance = axios.create({baseURL:"http://localhost:8080/"});
 
 export const AddUserDetailsToStore = (userDetails) => {
   return {
@@ -22,9 +23,9 @@ export const UpdateUserDetailsToDB = (userDetails) => {
     axiosInstance.post("/userDetails/update", userDetails, header)
           .then((data)=>{
             console.log("Add UserDetails to store 2: " + JSON.stringify(data.data));          
-            dispatch(AddUserDetailsToStore(userDetails))
+            dispatch(FetchUserDetailsFromDB(userDetails.userID))
           }).catch((error1)=>{
-            console.log("Eror updating user details: " + error1)
+            console.log("Error updating user details: " + error1)
           })
   }
 }
@@ -40,21 +41,18 @@ export const SaveUserDetailsToDB = (userDetails)=>{
           "Access-Control-Allow-Origin": "*",
       }
     }
-    
-    //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails}`)
-    axiosInstance.get(`/userDetails/find?userID=${userID}`)
+        axiosInstance.get(`/userDetails/find?userID=${userID}`)
     .then((data)=>{
       let details = data.data;
-      console.log("Fet userDetails: " )
+      console.log("Fetch user details: " + JSON.stringify(details))
       
     })
     .catch((error)=>{
-      console.log("2: " + error)      
       if(error.response.status == 404){
              axiosInstance.put("userDetails/save", userDetails, header)
         .then((data)=>{
           let details = data.data;
-          dispatch(AddUserDetailsToStore(details));
+          dispatch(FetchUserDetailsFromDB(details.userID));
           console.log("Saved UserDetials to DB: " + JSON.stringify(details));
         })
         .catch((error2)=>{
@@ -63,7 +61,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
       } else if(error.response.status == 301 || error.response.status== 302){
         dispatch(UpdateUserDetailsToDB(userDetails));
       } else {
-        console.log("ERROR: " + error)
+        console.log("Save user details to DB error: " + error)
       }
       
     });
@@ -71,22 +69,8 @@ export const SaveUserDetailsToDB = (userDetails)=>{
 }
 
 
-export const fetchUserDetailsFromDB = (userDetails) =>{
+export const FetchUserDetailsFromDB = (userID) =>{
   return (dispatch)=>{
-    /* axiosInstance.defaults.maxRedirects = 0; 
-    axiosInstance.interceptors.response.use(
-      response => response,
-      error => {
-      
-        if (error.response && [301, 302].includes(error.response.status)) {
-          const redirectUrl = error.response.headers.location;
-          //console.log("Add UserDetails to store: " + JSON.stringify(error.response.data));
-          dispatch(AddUserDetailsToStore(error.response.data))
-          return axiosInstance.get(redirectUrl);
-        }
-        return Promise.reject(error);
-      }
-    ); */
  
     let header ={
       headers: {
@@ -94,20 +78,18 @@ export const fetchUserDetailsFromDB = (userDetails) =>{
           "Access-Control-Allow-Origin": "*",
       }
     }
-    console.log("fetchUserDetailsFromDB : " + typeof(userDetails) + " " + userDetails)
-    //axiosInstance.get(`http://localhost:8080/userDetails/find?userID=${userDetails}`)
-    axiosInstance.get(`userDetails/find?userID=${userDetails}`)
+    axiosInstance.get(`userDetails/find?userID=${userID}`, header)
     .then((data)=>{
       let details = data.data;
-      //.log("Fet userDetails: " + JSON.stringify(data))
       dispatch(AddUserDetailsToStore(details));
     })
     .catch((error)=>{
       if(error.response.status == 301 || error.response.status == 302 ){
-        console.log("Fetch user from DB Error: " + error);
+        
         dispatch(AddUserDetailsToStore(error.response.data))
+      } else {
+        console.log("Fetch user details from DB Error: " + error);
       }
-      //console.log("Fetch user from DB Error: " + error);
     });
   }
 }
