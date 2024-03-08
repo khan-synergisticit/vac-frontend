@@ -15,7 +15,7 @@ export const AddUserDetailsToStore = (userDetails) => {
 export const SaveUserDetailsToDB = (userDetails)=>{
   
  
-  let userID = JSON.stringify(userDetails.userID);
+  let userID = userDetails.userID;
   return (dispatch)=>{
     axiosInstance.defaults.maxRedirects = 0; 
     axiosInstance.interceptors.response.use(
