@@ -20,7 +20,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
       
         if (error.response && [301, 302].includes(error.response.status)) {
           const redirectUrl = error.response.headers.location;
-          console.log("Add UserDetails to store: " + JSON.stringify(error.response.data));
+          console.log("Add UserDetails 2 to store: " + JSON.stringify(error.response.data));
           dispatch(AddUserDetailsToStore(error.response.data))
           return axiosInstance.get(redirectUrl);
         }
@@ -64,7 +64,9 @@ export const SaveUserDetailsToDB = (userDetails)=>{
          console.log("Update User details to DB Error: " + error)
        })
      } */
-   })
+   }).catch((error)=>{
+    console.log("Fetch user from DB Error: " + error);
+  });
  }
 }
 
