@@ -28,8 +28,8 @@ export const SaveUserDetailsToDB = (userDetails)=>{
       }
     );
  
-  let userID = String(userDetails.userID);
-  console.log("userDetails.userID " + userDetails.userID);
+  let userID = JSON.stringify(userDetails.userID);
+  console.log("userDetails.userID " + userID);
   let header ={
      headers: {
          'Content-Type': 'application/x-www-form-urlencoded',
