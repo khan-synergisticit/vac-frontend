@@ -33,7 +33,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
           axiosInstance2.post("http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/userDetails/save", userDetails, header)
           .then((data)=>{
             console.log("Add UserDetails to store 2: " + JSON.stringify(error.response.data));          
-            dispatch(AddUserDetailsToStore(userDetails))
+            dispatch(AddUserDetailsToStore(error.response.data))
           }).catch((error1)=>{
             console.log("Eror updating user details: " + error1)
           })
