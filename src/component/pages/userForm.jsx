@@ -18,13 +18,10 @@ let UserFormComponent =()=> {
   let dispatch = useDispatch();
   let [firstName, setFirstName] = useState(userDetails.firstName ?? "");
   let [lastName, setLastName] = useState(userDetails.lastName ?? "");
-  let [occupation, setOccupation] = useState(userDetails.occupation ?? "");
-  let [phone, setPhone] = useState(userDetails.phone ?? "");
   let [email, setEmail] = useState(userDetails.email ?? "");
   let [gender, setGender] = useState(userDetails.gender ?? "");
 
-  let [address1, setAddress1] = useState(userDetails.address1 ?? "");
-  let [address2, setAddress2] = useState(userDetails.address2 ?? "");
+  let [address, setAddress1] = useState(userDetails.address1 ?? "");
   let [city, setCity] = useState(userDetails.city ?? "");
   let [state, setStates] = useState(userDetails.state ?? "");
   let [zipcode, setZipCode] = useState(userDetails.zipcode ?? "");
@@ -37,7 +34,7 @@ let UserFormComponent =()=> {
   let selectGender = (genders) =>{
     setGender(genders);   
   }
-  //console.log("USER DETAILS: " + JSON.stringify(userDetails));
+  console.log("USER DETAILS: " + JSON.stringify(userDetails));
   let onSubmit = () =>{
 
     let userDetail = {
@@ -48,8 +45,7 @@ let UserFormComponent =()=> {
       email:email ?? userDetails.email,
       phone:phone ?? userDetails.phone,
       gender: gender ?? userDetails.gender,
-      address1: address1 ?? userDetails.address1,
-      address2: address2 ?? userDetails.address2,
+      address1: address ?? userDetails.address1,
       city: city ?? userDetails.city,
       state: state ?? userDetails.state,
       zipcode: zipcode ?? userDetails.zipcode
@@ -84,23 +80,6 @@ let UserFormComponent =()=> {
               onChange={(value)=>setLastName(value.target.value)}
             />
       </Grid>
-      
-      <Grid item xs={12} md={12}>
-      <TextField
-              id="phone"
-              label="Phone Number"
-              style={{width:200}}
-              defaultValue={userDetails.phone}
-              onChange={(value)=>setPhone(value.target.value)}
-            />
-            <TextField
-            id="occupation"
-            label="Occupation"
-            style={{width:300}}
-            defaultValue={userDetails.occupation}
-            onChange={(value)=>setOccupation(value.target.value)}
-        />
-      </Grid>
       <Grid item xs={12} md={12}>
       <TextField
             id="email"
@@ -120,20 +99,10 @@ let UserFormComponent =()=> {
         <TextField              
               variant="standard"
               id="outlined-disabled"
-              label="Address 1"
+              label="Addres"
               fullWidth
-              defaultValue={userDetails.address1}
+              defaultValue={userDetails.address}
               onChange={(value)=>setAddress1(value.target.value)}
-            />
-        </Grid>
-        <Grid item xs={12} md={12}>
-        <TextField
-              variant="standard"
-              id="outlined-disabled"
-              label="Address 2"
-              defaultValue={userDetails.address2}
-              onChange={(value)=>setAddress2(value.target.value)}
-              fullWidth
             />
         </Grid>
         <Grid item xs={12} md={12} >

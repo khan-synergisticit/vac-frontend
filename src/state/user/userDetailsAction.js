@@ -20,7 +20,7 @@ export const UpdateUserDetailsToDB = (userDetails) => {
           "Access-Control-Allow-Origin": "*",
       }
     }
-    axiosInstance.post("/userDetails/update", userDetails, header)
+    axiosInstance.post("/patients/update", userDetails, header)
           .then((data)=>{
             console.log("Add UserDetails to store 2: " + JSON.stringify(data.data));          
             dispatch(FetchUserDetailsFromDB(userDetails.userID))
@@ -41,7 +41,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
           "Access-Control-Allow-Origin": "*",
       }
     }
-        axiosInstance.get(`/userDetails/find?userID=${userID}`)
+        axiosInstance.get(`/patients/find?userID=${userID}`)
     .then((data)=>{
       let details = data.data;
       console.log("Fetch user details: " + JSON.stringify(details))
@@ -49,7 +49,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
     })
     .catch((error)=>{
       if(error.response.status == 404){
-             axiosInstance.put("userDetails/save", userDetails, header)
+             axiosInstance.put("patients/save", userDetails, header)
         .then((data)=>{
           let details = data.data;
           dispatch(FetchUserDetailsFromDB(details.userID));
@@ -78,7 +78,7 @@ export const FetchUserDetailsFromDB = (userID) =>{
           "Access-Control-Allow-Origin": "*",
       }
     }
-    axiosInstance.get(`userDetails/find?userID=${userID}`, header)
+    axiosInstance.get(`patients/find?userID=${userID}`, header)
     .then((data)=>{
       let details = data.data;
       dispatch(AddUserDetailsToStore(details));

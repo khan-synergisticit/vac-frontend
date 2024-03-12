@@ -5,14 +5,12 @@ const User_State = {
     userID:"",
     firstName:"",
     lastName:"",
-    occupation:"",
-    phone:"",
     email:"",
-    address1:"",
-    address2:"",
+    address:"",
     city:"",
     state:"",
-    zipCode:""
+    zipcode:"",
+    birthDate:"",
   },
   AllUserDetails:[]
 }
