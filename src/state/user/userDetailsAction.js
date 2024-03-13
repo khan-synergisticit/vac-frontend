@@ -70,6 +70,7 @@ export const SaveUserDetailsToDB = (userDetails)=>{
 
 
 export const FetchUserDetailsFromDB = (userID) =>{
+  console.log("FETCH: " + userID)
   return (dispatch)=>{
  
     let header ={
