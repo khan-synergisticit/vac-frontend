@@ -33,7 +33,7 @@ export default function AdminRouter() {
   //   },
   //   {
   //     path: '*',
-  //     element: <Navigate to="/404" replace />,
+  //     element: <te to="/404" replace />,
   //   },
   // ]);
 

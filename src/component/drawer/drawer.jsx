@@ -21,7 +21,7 @@ export default function TemporaryDrawer({isAdmin, userName}) {
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
-
+  print("IS ADMIN" + isAdmin)
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>

@@ -5,8 +5,26 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TemporaryDrawer from '../drawer/drawer.jsx';
+import { useDispatch } from 'react-redux';
+import { AddUserToStore } from '../../state/user/userAction.js';
+import { Navigate } from 'react-router-dom';
 
 export default function HeaderComponent({ signOut, userName, isAdmin }) {
+  let dispatch = useDispatch();
+
+  let handleSignout = ()=>{
+    let emptyUser =  {
+      userID : "",
+      userName: "",
+      role: ""
+    }
+    dispatch(AddUserToStore(emptyUser));
+    signOut();
+    return(
+      <Navigate replace to="/home"/>
+    )
+  }
+
   return (
     <Box sx={{ flexGrow: 1, top: 0, position: 'sticky', width: '100%' }}>
       <AppBar position="sticky">
@@ -15,7 +33,7 @@ export default function HeaderComponent({ signOut, userName, isAdmin }) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {userName}
           </Typography>
-          <Button  color="inherit" onClick={signOut}>Sign Out</Button>
+          <Button  color="inherit" onClick={handleSignout}>Sign Out</Button>
         </Toolbar>
       </AppBar>
     </Box>
