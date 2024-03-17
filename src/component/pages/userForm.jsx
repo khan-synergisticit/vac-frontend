@@ -9,8 +9,7 @@ import MenuItem from '@mui/joy/MenuItem';
 import Dropdown from '@mui/joy/Dropdown';
 import { useSelector, useDispatch } from 'react-redux';
 import { AddUserDetailsToStore, SaveUserDetailsToDB, FetchUserDetailsFromDB } from '../../state/user/userDetailsAction';
-import { Input } from '@aws-amplify/ui-react';
-
+import { DateConverter } from '../utils/dateConverter';
 
 let UserFormComponent =()=> {
   let user = useSelector((state) => state.UserReducer.User);
@@ -25,6 +24,9 @@ let UserFormComponent =()=> {
   let [city, setCity] = useState(userDetails.city ?? "");
   let [state, setStates] = useState(userDetails.state ?? "");
   let [zipcode, setZipCode] = useState(userDetails.zipcode ?? "");
+  let [birthDate, setBirthDate] = useState(userDetails.birthDate ?? "")
+
+  console.log("Birthdate: " + birthDate);
 
   useEffect(()=>{
     dispatch(FetchUserDetailsFromDB(user.userID))
@@ -81,6 +83,14 @@ let UserFormComponent =()=> {
             />
       </Grid>
       <Grid item xs={12} md={12}>
+        <TextField
+            id="birthDate"
+            label="Age"
+            fullWidth
+            defaultValue={userDetails.birthDate}
+            onChange={(value)=>setBirthDate(value.target.value)}
+        />
+     
       <TextField
             id="email"
             label="Email"
@@ -99,7 +109,7 @@ let UserFormComponent =()=> {
         <TextField              
               variant="standard"
               id="outlined-disabled"
-              label="Addres"
+              label="Address"
               fullWidth
               defaultValue={userDetails.address}
               onChange={(value)=>setAddress1(value.target.value)}
@@ -134,7 +144,7 @@ let UserFormComponent =()=> {
         </Grid> 
         <Grid item xs={12} md={12} >
           <Button variant="contained" onClick={onSubmit}>
-            Submit
+            Save
           </Button>
           </Grid>
       </Grid> 
