@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import TemporaryDrawer from '../drawer/drawer.jsx';
 import { useDispatch } from 'react-redux';
 import { AddUserToStore } from '../../state/user/userAction.js';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 export default function HeaderComponent({ signOut, userName, isAdmin }) {
   let dispatch = useDispatch();
@@ -20,8 +20,9 @@ export default function HeaderComponent({ signOut, userName, isAdmin }) {
     }
     dispatch(AddUserToStore(emptyUser));
     signOut();
+    window.localStorage.clear();
     return(
-      <Navigate replace to="/home"/>
+      <Link to="/home"/>
     )
   }
 

@@ -46,14 +46,14 @@ export default function TemporaryDrawer({isAdmin, userName}) {
       </List>
       <Divider />
       <List>
-          <ListItem key="userForm" disablePadding>
+          {isAdmin ? <ListItem key="userForm" disablePadding>
             <ListItemButton component={NavLink} to={'/userForm'}>
               <ListItemIcon>
                 <FormatListBulletedIcon/>
               </ListItemIcon>
               <ListItemText primary="User Profile" />
             </ListItemButton>
-          </ListItem>
+          </ListItem> : null}
       </List>
     </Box>
   );
