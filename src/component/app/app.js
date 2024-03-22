@@ -25,8 +25,8 @@ function ApplicationComponent({ signOut, user } ) {
   let Role = useSelector((state) => state.UserRoleReducer.Role);
   let dispatch = useDispatch();
   let userName = User && User.userName ? User.userName : "";
-  let isAdmin = Role.role == "admin";
-  console.log("USER ROLE: " + JSON.stringify(Role));
+  
+  
   useEffect(()=>{
     if(userName == ""){
       let newUser = {
@@ -60,7 +60,7 @@ function ApplicationComponent({ signOut, user } ) {
         return(
           <View className="App">
           <Router>
-          <HeaderComponent signOut={signOut} userName={userName} isAdmin={isAdmin}/>
+          <HeaderComponent signOut={signOut} userName={userName} />
           <div  style={{
               
               display: "flex",
@@ -68,7 +68,7 @@ function ApplicationComponent({ signOut, user } ) {
               overflowY: "scroll"
           }}>
           
-          {userName == "" ? <Circle/> : <UserRouter isAdmin={isAdmin}/>}
+          {Role.role == "" ? <Circle/> : <UserRouter/>}
           
           
          

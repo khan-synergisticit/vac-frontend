@@ -5,7 +5,7 @@ import {
   Card,
   View
 } from "@aws-amplify/ui-react";
-let HomePage = () =>{
+let UsersHomePage = () =>{
   
   return(
     
@@ -20,4 +20,4 @@ let HomePage = () =>{
 
 }
 
-export default HomePage;
+export default UsersHomePage;

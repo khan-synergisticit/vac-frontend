@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -15,13 +16,16 @@ import MenuIcon from '@mui/icons-material/Menu';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import Avatar from '@mui/material/Avatar';
 
-export default function TemporaryDrawer({isAdmin, userName}) {
+export default function TemporaryDrawer({userName}) {
+  let Role = useSelector((state) => state.UserRoleReducer.Role);
   const [open, setOpen] = React.useState(false);
+  let isAdmin = Role == "admin";
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
-  print("IS ADMIN" + isAdmin)
+  
+
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
@@ -46,14 +50,14 @@ export default function TemporaryDrawer({isAdmin, userName}) {
       </List>
       <Divider />
       <List>
-          {isAdmin ? <ListItem key="userForm" disablePadding>
+          {isAdmin ? null : <ListItem key="userForm" disablePadding>
             <ListItemButton component={NavLink} to={'/userForm'}>
               <ListItemIcon>
                 <FormatListBulletedIcon/>
               </ListItemIcon>
               <ListItemText primary="User Profile" />
             </ListItemButton>
-          </ListItem> : null}
+          </ListItem> }
       </List>
     </Box>
   );

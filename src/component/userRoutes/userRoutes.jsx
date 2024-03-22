@@ -1,20 +1,25 @@
 import React, { lazy, Suspense } from 'react';
+import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Routes, Route, useRoutes, Outlet, Navigate,} from "react-router-dom";
 import DashboardComponent from '../dashboard/dashboard.jsx';
 //export const Page404 = lazy(() => import('../pages/pageNotFound.jsx'));
 import NotFoundPage from '../pages/pageNotFound.jsx';
 import UserFormComponent from '../pages/userForm.jsx';
-import HomePage from '../pages/pageHome.jsx';
+import UsersHomePage from '../home/users/usersHome.jsx';
+import AdminHomePage from '../home/admin/adminHome.jsx';
 // ----------------------------------------------------------------------
 
-export default function UserRouter({isAdmin}) {
+export default function UserRouter() {
+  let Role = useSelector((state) => state.UserRoleReducer.Role);
+  let isAdmin = Role == "admin";
 
   return (
     <Routes>
       <Route path="/*" element={<NotFoundPage/>}/>
       <Route path="/" element={<Navigate replace to="/home" />} />
       {isAdmin ? null : <Route path="/userForm" element={<UserFormComponent/>}/>}
-      <Route path='/home' element={<HomePage />}/>
+      {isAdmin ? <Route path='/home' element={<AdminHomePage />}/> :<Route path='/home' element={<UsersHomePage />}/>}
+      
     </Routes>
   )
   // const routes = useRoutes([
