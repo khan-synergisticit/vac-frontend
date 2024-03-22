@@ -22,10 +22,11 @@ function ApplicationComponent({ signOut, user } ) {
   let [loading, setLoading] = useState(true);
 
   let User = useSelector((state) => state.UserReducer.User);
+  let Role = useSelector((state) => state.UserRoleReducer.Role);
   let dispatch = useDispatch();
   let userName = User && User.userName ? User.userName : "";
-  let isAdmin = User.role == "admin";
-
+  let isAdmin = Role.role == "admin";
+  console.log("USER ROLE: " + JSON.stringify(Role));
   useEffect(()=>{
     if(userName == ""){
       let newUser = {
