@@ -31,33 +31,46 @@ export const SaveUserToDB = (newUser)=>{
 
 export const FetchUserFromDB = (user) =>{
   return (dispatch)=>{   
- 
-    let header ={
-      headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-          "Access-Control-Allow-Origin": "*",
-      }
-    }
-    axiosInstance.post("users/find", user, header)
+    axiosInstance.get(`users/find?userID=${user.userID}`)
     .then((data)=>{
-      let user = data.data;
-      console.log("Fetch user: " + JSON.stringify(data.data))
-      dispatch(AddUserToStore(user));
-
-      
+      console.log("Fetch data: " + JSON.stringify(data.data))
+      dispatch(AddUserToStore(data.data));
+      dispatch(AddUserRoleToStore(data.data.role));
     })
     .catch((error)=>{
-      console.log("User fetch error: " + error)
-      if(error.response.status == 301 || error.response.status == 302 ){
+      if(error.response.status == 404 ){
+            console.log("User not found, saving as new user: " + error)
+            dispatch(SaveUserToDB(user));
+          } else {
+            console.log("Fetch user from DB Error: " + error);
+          }
+    })
+    // let header ={
+    //   headers: {
+    //       'Content-Type': 'application/json;charset=UTF-8',
+    //       "Access-Control-Allow-Origin": "*",
+    //   }
+    // }
+    // axiosInstance.post("users/find", user, header)
+    // .then((data)=>{
+    //   let user = data.data;
+    //   console.log("Fetch user: " + JSON.stringify(data.data))
+    //   dispatch(AddUserToStore(user));
+
+      
+    // })
+    // .catch((error)=>{
+    //   console.log("User fetch error: " + error)
+    //   if(error.response.status == 301 || error.response.status == 302 ){
         
-        dispatch(AddUserToStore(error.response.data))
-        dispatch(AddUserRoleToStore(error.response.data.role));
-      } else if(error.response.status == 404 ){
-        console.log("User fetch 404 error: " + error)
-        dispatch(SaveUserToDB(user));
-      } else {
-        console.log("Fetch user from DB Error: " + error);
-      }
-    });
+    //     dispatch(AddUserToStore(error.response.data))
+    //     dispatch(AddUserRoleToStore(error.response.data.role));
+    //   } else if(error.response.status == 404 ){
+    //     console.log("User fetch 404 error: " + error)
+    //     dispatch(SaveUserToDB(user));
+    //   } else {
+    //     console.log("Fetch user from DB Error: " + error);
+    //   }
+    // });
   }
 }

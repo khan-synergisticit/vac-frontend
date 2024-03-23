@@ -13,15 +13,42 @@ export default function UserRouter() {
   let Role = useSelector((state) => state.UserRoleReducer.Role);
   let isAdmin = Role == "admin";
 
-  return (
-    <Routes>
-      <Route path="/*" element={<NotFoundPage/>}/>
-      <Route path="/" element={<Navigate replace to="/home" />} />
-      {isAdmin ? null : <Route path="/userForm" element={<UserFormComponent/>}/>}
-      {isAdmin ? <Route path='/home' element={<AdminHomePage />}/> :<Route path='/home' element={<UsersHomePage />}/>}
-      
-    </Routes>
+  let AdminRoute = ()=>{
+    
+    return <Routes>
+    <Route path="/*" element={<NotFoundPage/>}/>
+    <Route path="/" element={<Navigate replace to="/home" />} />
+    <Route path='/home' element={<AdminHomePage />}/>      
+  </Routes>
+  
+  }
+
+  let UserRoute = () =>{
+    
+     return  <Routes>
+     <Route path="/*" element={<NotFoundPage/>}/>
+     <Route path="/" element={<Navigate replace to="/home" />} />
+     <Route path="/userForm" element={<UserFormComponent/>}/>
+     <Route path='/home' element={<UsersHomePage />}/>    
+   </Routes>
+    
+  }
+  
+  return(
+    <>
+    {isAdmin ? <AdminRoute/> : <UserRoute/>}
+    </>
   )
+  // return (
+  //   // <Routes>
+  //   //   <Route path="/*" element={<NotFoundPage/>}/>
+  //   //   <Route path="/" element={<Navigate replace to="/home" />} />
+  //   //   {isAdmin ? null : <Route path="/userForm" element={<UserFormComponent/>}/>}
+  //   //   {isAdmin ? <Route path='/home' element={<AdminHomePage />}/> :<Route path='/home' element={<UsersHomePage />}/>}
+      
+  //   // </Routes>
+  //   {isAdmin ? adminRoute() : userRoute()}
+  // )
   // const routes = useRoutes([
   //   {
   //     element: (
