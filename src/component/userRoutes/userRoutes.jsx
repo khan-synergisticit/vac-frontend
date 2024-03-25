@@ -7,6 +7,7 @@ import NotFoundPage from '../pages/pageNotFound.jsx';
 import UserFormComponent from '../pages/userForm.jsx';
 import UsersHomePage from '../home/users/usersHome.jsx';
 import AdminHomePage from '../home/admin/adminHome.jsx';
+import AllPatientsPage from '../pages/allPatients.jsx';
 // ----------------------------------------------------------------------
 
 export default function UserRouter() {
@@ -19,6 +20,7 @@ export default function UserRouter() {
     <Route path="/*" element={<NotFoundPage/>}/>
     <Route path="/" element={<Navigate replace to="/home" />} />
     <Route path='/home' element={<AdminHomePage />}/>      
+    <Route path="/patients" element={<AllPatientsPage />}/>
   </Routes>
   
   }

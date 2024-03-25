@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import { Group } from '@mui/icons-material';
 import Avatar from '@mui/material/Avatar';
 
 export default function TemporaryDrawer({userName}) {
@@ -25,6 +26,32 @@ export default function TemporaryDrawer({userName}) {
     setOpen(newOpen);
   };
   
+
+  let AdminListItem = () =>{
+    return(
+      <ListItem key="patients" disablePadding>
+      <ListItemButton component={NavLink} to={'/patients'}>
+        <ListItemIcon>
+          <Group/>
+        </ListItemIcon>
+        <ListItemText primary="All Patients" />
+      </ListItemButton>
+    </ListItem> 
+    )
+  }
+
+  let UserListItem = () =>{
+    return (
+      <ListItem key="userForm" disablePadding>
+      <ListItemButton component={NavLink} to={'/userForm'}>
+        <ListItemIcon>
+          <FormatListBulletedIcon/>
+        </ListItemIcon>
+        <ListItemText primary="User Profile" />
+      </ListItemButton>
+    </ListItem> 
+    )
+  }
 
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
@@ -50,14 +77,7 @@ export default function TemporaryDrawer({userName}) {
       </List>
       <Divider />
       <List>
-          {isAdmin ? null : <ListItem key="userForm" disablePadding>
-            <ListItemButton component={NavLink} to={'/userForm'}>
-              <ListItemIcon>
-                <FormatListBulletedIcon/>
-              </ListItemIcon>
-              <ListItemText primary="User Profile" />
-            </ListItemButton>
-          </ListItem> }
+          {isAdmin ? <AdminListItem/> :<UserListItem/>}
       </List>
     </Box>
   );

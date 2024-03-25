@@ -1,12 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
 import logo from "./donkey1.png";
+import { useDispatch } from "react-redux";
 import {
   Image,
   Card,
   View
 } from "@aws-amplify/ui-react";
+import { FetchPatientsCount } from "../../../state/patients/patientsAction";
+
+
 let AdminHomePage = () =>{
-  
+ 
+
+  useEffect(() => {
+    FetchPatientsCount();
+  },[])
+
   return(
     <div  style={{
       position: 'absolute', left: '50%', top: '50%',
