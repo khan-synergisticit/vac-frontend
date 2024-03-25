@@ -1,8 +1,8 @@
 import * as ActionType from "../actionTypes";
 import axios from "axios";
 import { AddUserRoleToStore } from "./userRoleAction";
-//const axiosInstance = axios.create({baseURL:"http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/"});
-const axiosInstance = axios.create({baseURL:"http://localhost:8080/"});
+const axiosInstance = axios.create({baseURL:"http://ec2-54-252-239-111.ap-southeast-2.compute.amazonaws.com:8080/"});
+//const axiosInstance = axios.create({baseURL:"http://localhost:8080/"});
 
 
 export const AddUserToStore = (newUser) => {
