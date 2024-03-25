@@ -9,7 +9,7 @@ import MenuItem from '@mui/joy/MenuItem';
 import Dropdown from '@mui/joy/Dropdown';
 import { useSelector, useDispatch } from 'react-redux';
 import { AddUserDetailsToStore, SaveUserDetailsToDB, FetchUserDetailsFromDB } from '../../state/user/userDetailsAction';
-import { DateConverter } from '../utils/dateConverter';
+import { DateConverter, AgeCalculator } from '../utils/dateConverter';
 
 let UserFormComponent =()=> {
   let user = useSelector((state) => state.UserReducer.User);
@@ -26,7 +26,7 @@ let UserFormComponent =()=> {
   let [zipcode, setZipCode] = useState(userDetails.zipcode ?? "");
   let [birthDate, setBirthDate] = useState(userDetails.birthDate ?? "")
 
-  console.log("Birthdate: " + birthDate);
+  console.log("Birthdate: " + AgeCalculator( userDetails.birthDate));
 
   useEffect(()=>{
     dispatch(FetchUserDetailsFromDB(user.userID))
@@ -69,8 +69,7 @@ let UserFormComponent =()=> {
             label="First Name"            
             fullWidth
             
-            defaultValue={userDetails.firstName}
-            onChange={(value)=>setFirstName(value.target.value)}
+            value={userDetails.firstName}
           />
       </Grid>
       <Grid item xs={12} md={12}>
@@ -78,25 +77,25 @@ let UserFormComponent =()=> {
               id="last-name"
               label="Last Name"
               fullWidth
-              defaultValue={userDetails.lastName}
-              onChange={(value)=>setLastName(value.target.value)}
+              value={userDetails.lastName}
             />
       </Grid>
       <Grid item xs={12} md={12}>
         <TextField
             id="birthDate"
             label="Age"
-            fullWidth
-            defaultValue={userDetails.birthDate}
-            onChange={(value)=>setBirthDate(value.target.value)}
+            
+            value={AgeCalculator( userDetails.birthDate)}
+            style={{width:100}}
         />
      
       <TextField
             id="email"
             label="Email"
-            fullWidth
+            
             defaultValue={userDetails.email}
             onChange={(value)=>setEmail(value.target.value)}
+            style={{width:400}}
         />
       </Grid>
       <Grid item xs={12} md={12}>
